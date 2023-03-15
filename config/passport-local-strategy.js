@@ -9,7 +9,6 @@ passport.use(new LocalStrategy({
 },function(email, password, done){
     try{
         User.findOne({email: email}).then(function(user){
-            console.log(user);
             if(!user ||  user.password != password){
                 console.log('Username/password is incorrect!');
                 return done(null, false);

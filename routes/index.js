@@ -5,12 +5,7 @@ const loginController = require('../controllers/login_controller');
 
 router.get('/', loginController.loginPage);
 router.get('/sign-up', loginController.signupPage);
-// router.get('/home', function(req, res){
-//     return res.render('home', {
-//         title: 'home',
-//         layout: 'layouts/layout2'
-//     })
-// });
+router.get('/logout', loginController.logout);
 
 router.use('/user', require('./users'));
 

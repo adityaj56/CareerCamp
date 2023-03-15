@@ -1,0 +1,22 @@
+a{
+    color: rgb(47, 46, 46);
+}
+ .delete{
+    margin-left: 95%;
+ }
+
+ .todoCheckbox{
+    width: 20px;
+    height: 20px;
+ }
+
+ .addStudent{
+    border: 0;
+    background-color: rgb(3, 66, 3, 0.5);
+ }
+
+ .addLink{
+    margin: 0 auto;
+    width: 80%;
+    /* background-color: rgb(3, 66, 3, 0.5); */
+ }
