@@ -11,6 +11,28 @@
     </div>
 </div>
 
+<!-- Student Card -->
+<% for(let i of student_list){ %>
+    <div class="row addLink" id="student-<%= i._id %>">
+        <div class="col-12">
+            <div class="card student">
+                <div class="card-body">
+                  <h5 class="card-title"><%= i.name %></h5>
+                  <span><%=i.email %></span>
+                  <span><%=i.college %></span>
+                  <div>
+                    <h6>Scores</h6>
+                    <span><%=i.scores.dsa %></span>
+                    <span><%=i.scores.webD %></span>
+                    <span><%=i.scores.react %></span>
+                </div>
+                  <a href="/toggle-completed/?id=<%=i._id%>"><i class="fa-regular fa-square fa-2x"></i></a>
+                  <a href="/delete-todo/?id=<%=i._id%>" class="delete"><i class="fa-solid fa-trash"></i></a>
+                </div>
+              </div>
+        </div>
+    </div>
+<% } %>
 
   
   <!-- Modal -->
@@ -18,18 +40,60 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Add a Student</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+            <form action="/student/create" method="post" id="addStudentForm">
+                <div class="form-group">
+                  <label for="studentName">Name</label>
+                  <input type="text" name="name" class="form-control" id="studentName" aria-describedby="nameHelp" placeholder="Enter Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="studentEmail">Email address</label>
+                    <input type="email" name="email" class="form-control" id="studentEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                  <label for="studentCollege">College</label>
+                  <input type="text" name="college" class="form-control" id="studentCollege" placeholder="College">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="placementStatus">placement Status</label>
+                    </div>
+                    <select name="placement" class="custom-select" id="placementStatus">
+                      <option value="Not Placed">Not Placed</option>
+                      <option value="Placed">Placed</option>
+                    </select>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">DSA score</span>
+                    </div>
+                    <input type="text" name="Dsa" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">WebD score</span>
+                    </div>
+                    <input type="text" name="webD" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                  </div>
+                  <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="inputGroup-sizing-sm">React score</span>
+                    </div>
+                    <input type="text" name="react" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" required>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                  </div>
+              </form>
         </div>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript" src="/js/student.js"></script>

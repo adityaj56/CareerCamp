@@ -2,30 +2,16 @@ const mongoose = require('mongoose');
 
 const interviewSchema = new mongoose.Schema({
     company: {
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: 'Company'
+        type: String,
+        required: true,
+        unique: true
     },
     students: [
         {
-            student:{
-                type: mongoose.SchemaType.ObjectId,
-                ref: 'Student',
-                required: true
-            },
-            status: {
-                type: String,
-                enum: ['Pass', 'Fail', 'On Hold', 'Did not attempt']
-            },
-            dateApplied: {
-                type: Date,
-                default: Date.now()
-            }
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student'
         }
-    ],
-    dateOfInteview: {
-        type: Date,
-        required: true
-    }
+    ]
 },{
     timestamps: true
 });
@@ -33,3 +19,5 @@ const interviewSchema = new mongoose.Schema({
 const Interview = mongoose.model('Interview', interviewSchema);
 
 module.exports = Interview;
+
+

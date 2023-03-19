@@ -14,20 +14,34 @@ const studentSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    placed: {
+    placement: {
         type: String,
         enum: ['Placed', 'Not Placed'],
         default: 'Not Placed'
     },
     scores: {
-        DSA: Number,
-        wedD: Number,
-        React: Number
+        dsa: Number,
+        webD: Number,
+        react: Number
     },
     interviews: [
         {
-            type: mongoose.SchemaType.ObjectId,
-            ref: 'Interview'
+            interview: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Interview'
+            },
+            status: {
+                type: String,
+                enum: ['pass', 'fail', 'on hold', 'did not attempt']
+            },
+            dateApplied: {
+                type: Date,
+                default: Date.now()
+            },
+            dateOfInterview: {
+                type: Date,
+                required: true
+            }
         }
     ]
 },{

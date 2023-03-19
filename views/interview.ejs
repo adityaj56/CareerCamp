@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/css/interview.css">
+
+<div class="row addLink">
+    <div class="col-12" >
+        <div class="card text-center addCompany">
+            <div class="card-body">
+              <a data-toggle="modal" data-target="#add-interview-modal"><i class="fa-regular fa-square-plus fa-3x"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comapany Card -->
+<% for(let interview of interview_list){ %>
+  <div class="row addLink" id="interview-<%= interview._id %>">
+      <div class="col-12">
+          <div class="card company">
+              <div class="card-body">
+                <h3 class="card-title"><%= interview.company %></h3>
+                <h4>Students</h4>
+                <div>Add a student</div>
+                <div>
+                  <form action="/interview/add-student" method="POST">
+                    <select name="addStudent" id="" required>
+                      <% for(let student of student_list) { %> 
+                        <option value="<%= student._id %>"><%= student.name %></option>
+                      <%}%>
+                    </select>
+                    <input type="hidden" name="interviewId" value="<%= interview._id %>">
+                    <input type="date" name="dateOfInterview">
+                    <input type="submit" value="Add">
+                  </form>
+                  <ul>
+                    <% for(let student of interview.students){ %> 
+                      <li id="student-<%= student._id %>">
+                        <p><%= student.name %></p>
+                        <p><%= student.email %></p>
+                        <p><%= student._id %></p>
+                        <form action="/interview/update-student-status" method="POST">
+                          <select name="status" id="" required>
+                            <option value="pass">Pass</option>
+                            <option value="fail">Fail</option>
+                            <option value="on hold">On Hold</option>
+                            <option value="did not attempt">Did not attempt</option>
+                          </select>
+                          <input type="hidden" name="studentid" id="" value="<%= student._id %>">
+                          <input type="hidden" name="interviewid" value="<%= interview._id %>">
+                          <input type="submit" value="Update status">
+                        </form>
+                      </li>
+                      <% } %>
+                  </ul>
+                  <a href="/delete-interview/?id=<%=interview._id%>" class="delete"><i class="fa-solid fa-trash"></i></a>
+                </div>
+              </div>
+            </div>
+      </div>
+  </div>
+<% } %>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="add-interview-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Make an interview</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form action="/interview/create" method="post" id="add-interview-form">
+                <div class="form-group">
+                  <label for="comapany-name">Comapany Name</label>
+                  <input type="text" name="company" class="form-control" id="company-name" aria-describedby="nameHelp" placeholder="Enter company Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="company-location">Interview Date</label>
+                    <input type="date" name="dateOfInterview" class="form-control" id="interview-date" aria-describedby="emailHelp"required>
+                </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">submit</button>
+                  </div>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
