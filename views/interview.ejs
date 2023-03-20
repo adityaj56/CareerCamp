@@ -35,7 +35,11 @@
                       <li id="student-<%= student._id %>">
                         <p><%= student.name %></p>
                         <p><%= student.email %></p>
-                        <p><%= student._id %></p>
+                        <% for(let x of student.interviews){ %> 
+                          <% if(x.interview == interview._id){%>
+                            <p><%= x.status%></p>
+                            <%} %>
+                          <%}%>
                         <form action="/interview/update-student-status" method="POST">
                           <select name="status" id="" required>
                             <option value="pass">Pass</option>
